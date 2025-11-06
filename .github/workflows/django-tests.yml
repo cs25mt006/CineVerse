@@ -46,18 +46,18 @@ jobs:
     - name: Migrate Database
       run: |
         python manage.py migrate
-      working-directory: backend
+      working-directory: Backend/backend
 
     - name: Run tests with coverage
       run: |
         coverage run manage.py test
         coverage report --fail-under=60
-      working-directory: backend
+      working-directory: Backend/backend
 
     - name: Generate HTML coverage report
       run: |
         coverage html
-      working-directory: backend
+      working-directory: Backend/backend
 
     - name: Upload coverage report artifact
       uses: actions/upload-artifact@v4
