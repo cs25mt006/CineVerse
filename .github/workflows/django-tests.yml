@@ -1,0 +1,60 @@
+name: Django CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: Harshini@2004
+          MYSQL_DATABASE: CineVerse
+          MYSQL_USER: root
+          MYSQL_PASSWORD: Harshini@2004
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=10
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        pip install coverage
+
+    - name: Wait for MySQL to initialize
+      run: |
+        sudo apt-get install -y mysql-client
+        until mysqladmin ping -h127.0.0.1 -uroot -pHarshini@2004 --silent; do sleep 2; done
+
+    - name: Migrate Database
+      run: |
+        python manage.py migrate
+      working-directory: backend
+
+    - name: Run tests with coverage
+      run: |
+        coverage run manage.py test
+        coverage report --fail-under=60
+      working-directory: backend
+
+    - name: Generate HTML coverage report
+      run: |
+        coverage html
+      working-directory: backend
+
+    - name: Upload coverage report artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: htmlcov
+        path: backend/htmlcov/
