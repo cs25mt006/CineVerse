@@ -12,8 +12,6 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: harshini123
           MYSQL_DATABASE: CineVerse
-          MYSQL_USER: root
-          MYSQL_PASSWORD: harshini123
         ports:
           - 3306:3306
         options: >-
