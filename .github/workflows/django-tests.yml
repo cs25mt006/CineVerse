@@ -10,7 +10,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: harshini123
+          MYSQL_ROOT_PASSWORD: "Harshini@2004"
           MYSQL_DATABASE: CineVerse
         ports:
           - 3306:3306
@@ -38,7 +38,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y mysql-client
-        until mysqladmin ping -h127.0.0.1 -uroot -pharshini123 --silent; do
+        until mysqladmin ping -h127.0.0.1 -uroot -p"Harshini@2004" --silent; do
         echo "Waiting for MySQL to be ready..."
         sleep 2
         done
