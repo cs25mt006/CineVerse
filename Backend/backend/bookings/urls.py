@@ -2,6 +2,8 @@ from django.urls import path
 from .views import CreateBookingView, GetOrdersView, LockSeatView, LockedSeatViewSet, SeatsStatusView, BookSeatsView, BookingViewSet
 from rest_framework import routers
 
+app_name = 'bookings'
+
 router = routers.DefaultRouter()
 router.register(r'bookings', BookingViewSet)
 router.register(r'locked-seats', LockedSeatViewSet)
