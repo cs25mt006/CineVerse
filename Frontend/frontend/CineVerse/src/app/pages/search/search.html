@@ -1,0 +1,39 @@
+<nav class="navbar-container">
+  <!-- Left: Logo -->
+  <div class="navbar-left">
+    <h2 class="brand" (click)="goHome()">CineVerse</h2>
+  </div>
+</nav>
+
+<div class="search-overlay">
+  <div class="search-container">
+    <div class="search-bar">
+      <input
+        #searchInput
+        type="text"
+        [(ngModel)]="query"
+        (input)="onSearchChange()"
+        placeholder="Search movies..."
+      />
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <div class="search-results" *ngIf="results.length > 0">
+      <div
+        class="result-item"
+        *ngFor="let movie of results"
+        (click)="openMovie(movie.id)"
+      >
+        <!-- <img [src]="movie.poster_url" alt="{{movie.title}}" /> -->
+        <div class="movie-info">
+          <h6>{{ movie.title }}</h6>
+          <p>{{ movie.language }} • {{ movie.genre }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-results" *ngIf="query && results.length === 0">
+      No movies found.
+    </div>
+  </div>
+</div>

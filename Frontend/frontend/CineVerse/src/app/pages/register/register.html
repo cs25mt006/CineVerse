@@ -1,0 +1,58 @@
+<nav class="navbar-container">
+  <!-- Left: Logo -->
+  <div class="navbar-left">
+    <h2 class="brand" (click)="goHome()">CineVerse</h2>
+  </div>
+</nav>
+
+<div class="register-page">
+  <h1 class="title">REGISTER</h1>
+
+  <div class="form-container">
+    <form (ngSubmit)="register()">
+      <label>Name</label>
+      <input type="text" [(ngModel)]="username" name="username" placeholder="Name" required />
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
+        
+      <label>First Name</label>
+      <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" required />
+
+      <label>Last Name</label>
+      <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" required />
+
+      <label>Gender</label>
+      <select [(ngModel)]="gender" name="gender" required>
+        <option value="" disabled selected>Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label>Enter Password</label>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Enter Password" required />
+
+      <label>Re-enter Password</label>
+      <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Re-enter Password" required />
+
+      <div class="terms">
+        <input type="checkbox" [(ngModel)]="termsAccepted" name="terms" />
+        <span>Terms and conditions</span>
+      </div>
+
+      <button 
+        type="submit" 
+        class="register-btn"
+        [disabled]="isSubmitting"
+      >
+        {{ isSubmitting ? 'Registering...' : 'Register' }}
+      </button>
+
+      <p class="login-link">
+        Already have an account?
+        <a (click)="goToLogin()">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

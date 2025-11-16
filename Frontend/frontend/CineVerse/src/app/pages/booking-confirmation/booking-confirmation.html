@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<div class="confirmation-page">
+  <h2>Your Ticket</h2>
+
+  <div class="ticket-card">
+    <div class="ticket-header">
+      <img [src]="posterUrl || 'assets/placeholder.png'" alt="poster" class="poster"/>
+      <div class="ticket-info">
+        <h3>{{ movieTitle }}</h3>
+        <p class="lang">{{ movieLanguage }}</p>
+        <p class="sub">{{ theaterName }}</p>
+        <p class="sub">{{ date | date: 'dd MMM yyyy' }} | {{ showTime }}</p>
+      </div>
+    </div>
+
+    <div class="ticket-details">
+      <p><strong>{{ seats.length }}</strong> Tickets</p>
+      <p>Seats: {{ formatSeats() }}</p>
+      <p><strong>Booking ID:</strong> {{ bookingId }}</p>
+    </div>
+
+    <hr />
+
+    <div class="ticket-total">
+      <span>Total Amount</span>
+      <span>₹ {{ amount }}</span>
+    </div>
+  </div>
+
+  <button class="home-btn" (click)="backToHome()">Back to Home</button>
+</div>

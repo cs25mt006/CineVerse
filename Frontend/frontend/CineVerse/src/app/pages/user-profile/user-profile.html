@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<!-- === Tabs under navbar === -->
+<div class="profile-tabs">
+  <button
+    [class.active]="activeTab === 'profile'"
+    (click)="setActiveTab('profile')"
+  >
+    Profile
+  </button>
+  <button
+    [class.active]="activeTab === 'orders'"
+    (click)="setActiveTab('orders')"
+  >
+    Your Orders
+  </button>
+</div>
+
+<!-- === PROFILE SECTION === -->
+<div *ngIf="activeTab === 'profile'; else ordersTab" class="profile-container">
+  <div *ngIf="!isLoading && user; else loading">
+    <h1 class="profile-header">Account Details</h1>
+
+    <div class="profile-content">
+      <!-- Left column -->
+      <div class="profile-left">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" [value]="user.username" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" [value]="user.email" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" [value]="user.first_name" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" [value]="user.last_name" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <input type="text" [value]="user.gender" readonly />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === ORDERS SECTION === -->
+<ng-template #ordersTab>
+  <div class="orders-container" *ngIf="!isLoading; else loading">
+    <h1 class="orders-header">Your Bookings</h1>
+
+    <div *ngIf="orders.length > 0; else noOrders" class="orders-list">
+
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-left">
+          <h2 class="movie-title">{{ order.movie }}</h2>
+          <p class="theater">{{ order.theater }} — {{ order.location }}</p>
+          <p class="datetime">{{ order.formattedDate }} | {{ order.formattedTime }}</p>
+          <p class="seats">Seats: {{ order.formattedSeats }}</p>
+          <p class="payment-id">Payment ID: {{ order.payment_id }}</p>
+        </div>
+
+        <div class="order-right">
+          <p class="price">₹{{ order.totalamount/100 }}</p>
+          <p class="booking-id">Booking ID: {{ order.id }}</p>
+          <p class="booked-on">Booked on: {{ order.bookingtime | date: 'medium' }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #noOrders>
+      <div class="no-orders">You haven’t booked any tickets yet.</div>
+    </ng-template>
+  </div>
+</ng-template>
+
+
+<!-- === GLOBAL LOADING TEMPLATE === -->
+<ng-template #loading>
+  <div class="loading">Loading...</div>
+</ng-template>
+
+<app-footer></app-footer>

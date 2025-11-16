@@ -1,0 +1,66 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+
+<div class="add-show-container">
+  <h1 class="page-title">ADD SHOW</h1>
+
+  <form [formGroup]="showForm" (ngSubmit)="submit()" class="show-form">
+
+    <div class="form-group">
+      <label>Movie</label>
+      <select formControlName="movie">
+        <option value="">Select Movie</option>
+        <option *ngFor="let movie of movies" [value]="movie.id">
+          {{ movie.title }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Location</label>
+      <select formControlName="location" (change)="onLocationChange()">
+        <option value="">Select Location</option>
+        <option *ngFor="let loc of locations" [value]="loc.id">
+          {{ loc.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Theater</label>
+      <select formControlName="theater" (change)="onTheaterChange()">
+        <option value="">Select Theater</option>
+        <option *ngFor="let th of theaters" [value]="th.id">
+          {{ th.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Screen</label>
+      <select formControlName="screen">
+        <option value="">Select Screen</option>
+        <option *ngFor="let sc of screens" [value]="sc.id">
+          {{ sc.screenname }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" formControlName="date" />
+      </div>
+
+      <div class="form-group">
+        <label>Show Time</label>
+        <input type="time" formControlName="showtime" />
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting" class="submit-btn">
+      {{ isSubmitting ? 'Saving...' : 'Add Show' }}
+    </button>
+
+  </form>
+</div>
+<app-footer></app-footer>

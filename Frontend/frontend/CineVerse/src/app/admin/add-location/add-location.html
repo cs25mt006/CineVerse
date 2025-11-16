@@ -1,0 +1,21 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+
+<div class="add-location-container">
+  <h1 class="page-title">ADD LOCATION</h1>
+
+  <form [formGroup]="locationForm" (ngSubmit)="submit()" class="location-form">
+
+    <div class="form-group">
+      <label>Location Name</label>
+      <input type="text" formControlName="name" placeholder="Enter location name" />
+    </div>
+
+    <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Saving...' : 'Add Location' }}
+    </button>
+
+  </form>
+</div>
+
+
+<app-footer></app-footer>

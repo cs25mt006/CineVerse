@@ -1,0 +1,200 @@
+/* Container */
+.shows-container {
+  padding: 2rem 4rem;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+/* Title & Subtitle */
+.movie-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.language {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+
+/* Date Strip */
+.date-strip {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+  overflow-x: auto;
+  height: 4.5em;
+  scrollbar-width: thin;
+}
+
+.date-box {
+  text-align: center;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  background: #f0f4f7;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  min-width: 95px;
+  flex-shrink: 0;
+}
+
+.date-box:hover {
+  background: #e1ebf2;
+}
+
+.date-box.active {
+  background: #fff;
+  border-bottom: 3px solid #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.day {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.date {
+  display: block;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Theater Blocks */
+.theater-section {
+  margin-top: 2rem;
+}
+
+.theater-block {
+  background: #eef7fb;
+  padding: 1.5rem 1.8rem;
+  border-radius: 10px;
+  margin-bottom: 1.4rem;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.theater-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111;
+  flex: 0 0 220px;
+  margin-bottom: 0.8rem;
+}
+
+/* Showtimes row */
+.showtimes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+/* Showtime Buttons */
+.showtime-btn {
+  border: 2px solid #ccc;
+  background: white;
+  padding: 0.45rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* Colors based on status */
+.showtime-btn.available {
+  color: #198754;
+  border-color: #198754;
+}
+
+.showtime-btn.available:hover {
+  background: #198754;
+  color: white;
+}
+
+.showtime-btn.fast {
+  color: #ffb300;
+  border-color: #ffb300;
+}
+
+.showtime-btn.fast:hover {
+  background: #ffb300;
+  color: white;
+}
+
+.showtime-btn.not {
+  color: #999;
+  border-color: #dc3545;
+  background: #f6f6f6;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+  align-items: center;
+}
+
+.legend .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.dot.available {
+  background: #198754;
+}
+
+.dot.fast {
+  background: #ffc107;
+}
+
+.dot.not {
+  background: #dc3545;
+}
+
+/* Fallbacks */
+.no-shows {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #777;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Fade while loading */
+.fade-container {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-container.loading {
+  opacity: 0.3;
+  pointer-events: none;
+  filter: blur(1px);
+}

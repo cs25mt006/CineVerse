@@ -1,0 +1,19 @@
+<section class="movie-section">
+  <h2>
+    Currently Showing
+    <span *ngIf="currentLocation">in {{ currentLocation.name }}</span>
+  </h2>
+
+  <div *ngIf="isLoading" class="loading">Loading...</div>
+
+  <div class="movie-grid" *ngIf="!isLoading && movies.length">
+    <div class="movie-card" *ngFor="let movie of movies" (click)="openMovie(movie)">
+      <img [src]="movie.poster" [alt]="movie.title" />
+      <p class="title">{{ movie.title }}</p>
+    </div>
+  </div>
+
+  <p *ngIf="!isLoading && !movies.length" class="empty">
+    No movies available for this location.
+  </p>
+</section>

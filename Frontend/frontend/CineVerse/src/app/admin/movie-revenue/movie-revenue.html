@@ -1,0 +1,34 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+
+<div class="revenue-container" *ngIf="!isLoading; else loading">
+  <h1 class="header">Movie Revenue Details</h1>
+
+  <div class="movies-grid">
+    <div 
+      class="movie-card"
+      *ngFor="let movie of movies"
+      (click)="toggleExpand(movie.id)"
+      [class.expanded]="expandedMovieId === movie.id"
+    >
+      <div class="movie-info">
+        <img [src]="movie.poster" alt="{{ movie.title }}" class="poster" />
+        <div>
+          <h3>{{ movie.title }}</h3>
+          <p>{{ movie.language }} • {{ movie.genre }}</p>
+        </div>
+      </div>
+
+      <div class="expand-section" *ngIf="expandedMovieId === movie.id">
+        <p><strong>Release Date:</strong> {{ movie.releasedate }}</p>
+        <p><strong>Total Revenue:</strong> ₹{{ movie.revenue/100 | number }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading...</div>
+</ng-template>
+
+
+<app-footer></app-footer>

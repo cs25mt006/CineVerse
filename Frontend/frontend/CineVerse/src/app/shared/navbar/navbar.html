@@ -1,0 +1,50 @@
+<nav class="navbar-container">
+  <!-- Left: Logo -->
+  <div class="navbar-left">
+    <h2 class="brand" (click)="goHome()">CineVerse</h2>
+  </div>
+
+  <!-- Center: Search bar -->
+  <div class="navbar-center">
+    <div class="search-box" (click)="onSearchFocus()">
+      <i class="fa-solid fa-bars menu-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search"
+        readonly
+      />
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    </div>
+  </div>
+
+  <!-- Right: Region and Login -->
+  <div class="navbar-right">
+    <button class="region-button" (click)="openRegionPopup()">
+      <i class="fa-solid fa-location-dot"></i>
+      {{ selectedRegion || 'Region' }}
+    </button>
+    <ng-container *ngIf="!currentUser; else loggedIn">
+      <button class="login-button" (click)="gotoLogin()">
+        Login
+      </button>
+    </ng-container>
+
+    <ng-template #loggedIn>
+      <div class="user-dropdown-root">
+        <div class="user-display" (click)="toggleUserDropdown()">
+          <i class="fa-solid fa-user"></i>
+          <span class="user-name">{{ currentUser?.username }}</span>
+          <i class="fa-solid fa-caret-down" style="margin-left:6px;color:#666"></i>
+        </div>
+
+        <div class="user-dropdown" [class.show]="isUserDropdownOpen" *ngIf="isUserDropdownOpen">
+          <ul>
+            <li (click)="gotoProfile()">Profile</li>
+            <li class="danger" (click)="logout()">Logout</li>
+          </ul>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  

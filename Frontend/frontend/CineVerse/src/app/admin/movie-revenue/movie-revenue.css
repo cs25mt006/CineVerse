@@ -1,0 +1,64 @@
+.revenue-container {
+  padding: 40px;
+  background-color: #f8fafc;
+  min-height: 80vh;
+}
+
+.header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.02);
+}
+
+.movie-card.expanded {
+  border: 2px solid #111;
+}
+
+.movie-info {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.poster {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.expand-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+  font-size: 15px;
+  color: #333;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  font-size: 20px;
+}
+
+

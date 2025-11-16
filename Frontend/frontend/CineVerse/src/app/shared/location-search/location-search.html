@@ -1,0 +1,36 @@
+<div class="location-overlay" *ngIf="isModalOpen" (click)="onOverlayClick()">
+  <div class="location-box" (click)="$event.stopPropagation()">
+    <div class="search-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search for your city..."
+        (input)="onSearchChange()"
+        (keyup.enter)="searchLocation()"
+      >
+    </div>
+
+    <!-- Search Results -->
+    <div class="search-results" *ngIf="searchQuery">
+      <div class="result-item" *ngFor="let city of results" (click)="selectCity(city)">
+        {{ city.name }}
+      </div>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="no-results" *ngIf="searchQuery && !hasResults">
+      No cities found matching your search
+    </div>
+
+    <!-- Popular Cities Section -->
+    <div class="popular-section" *ngIf="!searchQuery">
+      <h3 class="popular-title">Popular Cities</h3>
+      <div class="city-grid">
+        <div class="city-item" *ngFor="let city of popularCities" (click)="selectCity(city)">
+          {{ city.name }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

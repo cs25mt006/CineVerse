@@ -1,0 +1,56 @@
+<div class="payment-page">
+    <div class="top-bar">
+        <div class="left-section">
+        <button class="back-btn" (click)="goBack()">←</button>
+        <div class="movie-info">
+            <h3>
+            <span class="movie-title">{{ movieTitle }}</span>
+            <span class="movie-lang">({{ movieLanguage }})</span>
+            </h3>
+            <p class="show-details">
+            {{ theaterName }} | {{ date | date: 'dd MMM yyyy' }} | {{ formatTime(showTime) }}
+            </p>
+        </div>
+        </div>
+    </div>
+
+  <!-- Summary Card -->
+  <div class="summary-card">
+    <h4>{{ movieTitle }}</h4>
+    <p class="grey">{{ movieLanguage }}</p>
+    <p class="grey">{{ date | date: 'dd MMM yyyy' }} | {{ formatTime(showTime) }}</p>
+    <p class="grey">Seats: {{ getSeatLabels() }}</p>
+    <p class="grey">{{ theaterName }}</p>
+  </div>
+
+  <!-- Price Details -->
+  <div class="price-card">
+    <div class="line">
+      <span>Ticket Price</span>
+      <span>₹{{ totalPrice }}</span>
+    </div>
+    <div class="line">
+      <span>Taxes</span>
+      <span>₹{{ taxes }}</span>
+    </div>
+    <hr />
+    <div class="line total">
+      <span>Order Total</span>
+      <span>₹{{ grandTotal }}</span>
+    </div>
+  </div>
+
+  <!-- Amount Payable -->
+  <div class="amount-card">
+    <span>Amount Payable</span>
+    <span class="amount">₹{{ grandTotal }}</span>
+  </div>
+
+  <!-- Terms -->
+  <div class="terms">
+    <input type="checkbox" [(ngModel)]="termsAccepted" /> Terms and conditions
+  </div>
+
+  <!-- Book Button -->
+  <button class="book-btn" (click)="payNow()">Pay Now</button>
+</div>

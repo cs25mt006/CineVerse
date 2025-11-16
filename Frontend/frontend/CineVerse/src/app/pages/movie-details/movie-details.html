@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<div class="movie-container" *ngIf="!isLoading && movie">
+  <!-- Left Section -->
+  <div class="details-left">
+    <h1 class="title">{{ movie.title }}</h1>
+    <p class="description">{{ movie.description }}</p>
+
+    <div class="extra">
+      <p><strong>Genre:</strong> {{ movie.genre }}</p>
+      <p><strong>Language:</strong> {{ movie.language }}</p>
+      <p><strong>Duration:</strong> {{ movie.duration }}</p>
+      <p><strong>Release Date:</strong> {{ movie.releasedate | date }}</p>
+      <p><strong>Cast:</strong> {{ movie.cast }}</p>
+    </div>
+
+    <button *ngIf="canBook" class="book-btn" (click)="bookTicket()">Book Ticket</button>
+
+    <div *ngIf="!canBook" class="info-message">
+      <p>Not available in your selected location.</p>
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="details-right">
+    <img [src]="movie.poster" [alt]="movie.title" />
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading">Loading...</div>
+
+<app-footer></app-footer>

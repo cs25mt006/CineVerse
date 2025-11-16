@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+
+<div class="shows-container" *ngIf="!isLoading; else loadingTemplate">
+  <h1 class="movie-title">{{ movieTitle }}</h1>
+  <p class="language">{{ movieLanguage }}</p>
+
+  <!-- Date Selector -->
+  <div class="date-strip">
+    <div
+      class="date-box"
+      *ngFor="let d of dateList"
+      [class.active]="d.iso === selectedDate"
+      (click)="selectDate(d.iso)"
+    >
+      <span class="day">{{ d.label }}</span>
+      <span class="date">{{ d.date }}</span>
+    </div>
+  </div>
+
+
+  <!-- Legend -->
+  <div class="legend">
+    <span><span class="dot available"></span>Available</span>
+    <span><span class="dot fast"></span>Fast Filling</span>
+    <span><span class="dot not"></span>Not Available</span>
+  </div>
+
+
+  <!-- Theaters Section -->
+   <div class="fade-container" [class.loading]="isLoading">
+    <ng-container *ngIf="!isLoading; else loadingTemplate">
+      <div *ngIf="(groupedShows | keyvalue).length > 0; else noShows" class="theater-section">
+        <div *ngFor="let theater of (groupedShows | keyvalue)" class="theater-block">
+          <div class="theater-row">
+            <h3 class="theater-name">{{ theater.key }}</h3>
+
+            <div class="showtimes">
+              <button
+                *ngFor="let show of theater.value"
+                class="showtime-btn"
+                [ngClass]="{
+                  available: show.status === 'available' || !show.status,
+                  fast: show.status === 'fast',
+                  not: show.status === 'unavailable'
+                }"
+                [disabled]="show.status === 'unavailable'"
+                (click)="goToSeatMatrix(show.id, show)"
+              >
+                {{ getFormattedTime(show.showtime) }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+   </div>
+
+  <ng-template #noShows>
+    <p class="no-shows">No shows available for this date in {{ currentLocation?.name }}.</p>
+  </ng-template>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">Loading shows...</div>
+</ng-template>
+
+<app-footer></app-footer>

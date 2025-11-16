@@ -1,0 +1,63 @@
+<!-- src/app/admin/add-movie/add-movie.component.html -->
+<app-admin-nav-bar></app-admin-nav-bar>
+<div class="add-movie-container">
+  <h1 class="page-title">ADD MOVIE</h1>
+
+  <form [formGroup]="movieForm" (ngSubmit)="submit()" class="movie-form">
+
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" formControlName="title" placeholder="Name" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Genre</label>
+        <input type="text" formControlName="genre" placeholder="Genre" />
+      </div>
+      <div class="form-group">
+        <label>Cast</label>
+        <input type="text" formControlName="cast" placeholder="Cast" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Language</label>
+        <input type="text" formControlName="language" placeholder="Language" />
+      </div>
+      <div class="form-group">
+        <label>Release Date</label>
+        <input type="date" formControlName="releasedate" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Duration (HH:MM:SS)</label>
+        <input type="text" formControlName="duration" placeholder="02:30:00" />
+      </div>
+      <div class="form-group">
+        <label>Revenue</label>
+        <input type="number" formControlName="revenue" placeholder="0" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description" placeholder="Description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Poster</label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*" />
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting" class="submit-btn">
+      {{ isSubmitting ? 'Uploading...' : 'Add Movie' }}
+    </button>
+
+  </form>
+</div>
+
+<app-footer></app-footer>

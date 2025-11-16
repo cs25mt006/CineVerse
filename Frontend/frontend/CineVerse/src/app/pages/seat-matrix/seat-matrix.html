@@ -1,0 +1,102 @@
+<div class="seat-page" *ngIf="!isLoading; else loading">
+  <!-- Top Header -->
+  <div class="top-bar">
+    <div class="left-section">
+      <button class="back-btn" (click)="goBack()">←</button>
+      <div class="movie-info">
+        <h3>
+          <span class="movie-title">{{ movieTitle }}</span>
+          <span class="movie-lang">({{ movieLanguage }})</span>
+        </h3>
+        <p class="show-details">
+          {{ theaterName }} | {{ date | date: 'dd MMM yyyy' }} | {{ formatTime(showTime) }}
+        </p>
+      </div>
+    </div>
+    <button class="ticket-btn" (click)="openSeatCountDialog()">
+      🎟️ {{ maxSelectableSeats ? maxSelectableSeats + ' Tickets' : 'Select Seats' }}
+    </button>
+  </div>
+
+  <!-- Screen Indicator -->
+  <div class="screen-box">SCREEN THIS WAY</div>
+
+
+
+  <!-- Seat Matrix -->
+  <div class="matrix-container">
+    <div *ngFor="let price of (groupedSeats | keyvalue)" class="price-section">
+      <div class="price-info">
+          ₹{{ price.key }}
+          <span class="seat-type" *ngIf="(price.value | keyvalue)?.length">
+            {{ (price.value | keyvalue)[0]?.value?.[0]?.seattype || '' }}
+          </span>
+        </div>
+      <div class="seat-block">
+        <div *ngFor="let row of (price.value | keyvalue)" class="row-group">
+          <div class="row-label">{{ row.key }}</div>
+          <div class="row-seats">
+            <!-- <button
+              *ngFor="let seat of row.value"
+              class="seat"
+              [ngClass]="{
+                'available': seat.status === 'available',
+                'selected': isSelected(seat),
+                'locked': seat.status === 'locked',
+                'booked': seat.status === 'booked'
+              }"
+              [disabled]="seat.status !== 'available'"
+              (click)="selectSeat(seat)"
+            ></button> -->
+            <button
+              *ngFor="let seat of row.value"
+              class="seat"
+              [ngClass]="{
+                'available': seat.status === 'available',
+                'selected': isSelected(seat),
+                'locked': seat.status === 'locked',
+                'booked': seat.status === 'booked'
+              }"
+              [attr.aria-label]="'Seat ' + seat.colomnnumber"
+              [disabled]="seat.status !== 'available'"
+              (click)="selectSeat(seat)"
+            >
+              <span class="seat-label">{{ seat.colomnnumber }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="bottom-bar">
+    <div class="total">
+      ₹{{ totalPrice }} | {{ selectedSeats.length }}/{{ maxSelectableSeats || 0 }} Selected
+    </div>
+
+    <button
+      class="pay-btn"
+      [disabled]="selectedSeats.length !== maxSelectableSeats || maxSelectableSeats === 0"
+      (click)="bookNow()"
+    >
+      {{ selectedSeats.length === maxSelectableSeats && selectedSeats.length > 0 ? 'Book Now' : 'Select Seats' }}
+    </button>
+  </div>
+
+  <!-- Seat Count Dialog -->
+  <div class="overlay" *ngIf="isSeatCountDialogOpen">
+    <div class="dialog">
+      <h2>How many seats?</h2>
+      <div class="count-options">
+        <button *ngFor="let count of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" (click)="setSeatCount(count)">
+          {{ count }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading seat layout...</div>
+</ng-template>

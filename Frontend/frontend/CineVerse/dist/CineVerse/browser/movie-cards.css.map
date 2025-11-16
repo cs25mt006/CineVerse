@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/home/movie-cards/movie-cards.css"],
+  "sourcesContent": [".movie-section { padding: 1rem 2rem; }\n.movie-section h2 { text-transform: lowercase; margin-bottom: 1rem; font-weight: 600; }\n.movie-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center; }\n.movie-card { width: 180px; cursor: pointer; text-align: center; transition: transform 0.2s ease-in-out; }\n.movie-card img { width: 100%; height: 260px; border-radius: 8px; object-fit: cover; }\n.movie-card:hover { transform: scale(1.05); }\n.title { margin-top: 0.5rem; font-size: 0.95rem; color: #333; }\n.loading, .empty { text-align: center; color: gray; font-style: italic; }\n"],
+  "mappings": ";AAAA,CAAC;AAAgB,WAAS,KAAK;AAAM;AACrC,CADC,cACc;AAAK,kBAAgB;AAAW,iBAAe;AAAM,eAAa;AAAK;AACtF,CAAC;AAAa,WAAS;AAAM,aAAW;AAAM,OAAK;AAAQ,mBAAiB;AAAQ;AACpF,CAAC;AAAa,SAAO;AAAO,UAAQ;AAAS,cAAY;AAAQ,cAAY,UAAU,KAAK;AAAa;AACzG,CADC,WACW;AAAM,SAAO;AAAM,UAAQ;AAAO,iBAAe;AAAK,cAAY;AAAO;AACrF,CAFC,UAEU;AAAS,aAAW,MAAM;AAAO;AAC5C,CAAC;AAAQ,cAAY;AAAQ,aAAW;AAAS,SAAO;AAAM;AAC9D,CAAC;AAAS,CAAC;AAAQ,cAAY;AAAQ,SAAO;AAAM,cAAY;AAAQ;",
+  "names": []
+}

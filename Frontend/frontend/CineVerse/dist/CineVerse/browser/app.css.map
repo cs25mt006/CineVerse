@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.css"],
+  "sourcesContent": [".simple-header {\n\theight: 72px; /* match navbar height */\n\tdisplay: flex;\n\talign-items: center;\n\tpadding: 0 48px;\n\tbackground: #fff;\n\tbox-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);\n}\n\n.simple-header .brand {\n\tmargin: 0;\n\tfont-size: 24px;\n\tfont-weight: 600;\n}\n\n/* ensure router content starts below header when using full-page search */\n/* router-outlet sibling rules are intentionally omitted; pages control their own layout */\n"],
+  "mappings": ";AAAA,CAAC;AACA,UAAQ;AACR,WAAS;AACT,eAAa;AACb,WAAS,EAAE;AACX,cAAY;AACZ,cAAY,EAAE,IAAI,IAAI,KAAK,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE;AACrC;AAEA,CATC,cASc,CAAC;AACf,UAAQ;AACR,aAAW;AACX,eAAa;AACd;",
+  "names": []
+}

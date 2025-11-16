@@ -1,0 +1,98 @@
+.movie-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem 6rem;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.details-left {
+  flex: 1;
+  min-width: 400px;
+}
+
+.details-right {
+  flex: 0 0 500px; /* allocate fixed width for large image */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.details-right img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Typography */
+.title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.extra p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Button */
+.book-btn {
+  margin-top: 2rem;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.book-btn:hover {
+  background: #333;
+}
+
+/* Info message */
+.info-message {
+  margin-top: 1.5rem;
+  color: #888;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .movie-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .details-left, .details-right {
+    flex: none;
+    width: 100%;
+  }
+
+  .details-right {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .details-right img {
+    max-width: 400px;
+  }
+}

@@ -1,0 +1,259 @@
+.profile-container {
+  background: #e9f0f5;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+}
+
+.profile-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2rem;
+}
+
+.profile-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4rem;
+}
+
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 350px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.6rem;
+  background: #f9f9f9;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+input[readonly] {
+  cursor: not-allowed;
+}
+
+.profile-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-placeholder i {
+  font-size: 3rem;
+  color: #666;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+/* --- Tabs under navbar --- */
+.profile-tabs {
+  display: flex;
+  gap: 2rem;
+  padding: 0.8rem 3rem;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-tabs button {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  padding-bottom: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.profile-tabs button.active {
+  color: #000;
+  font-weight: 600;
+  border-bottom: 2px solid #000;
+}
+
+/* --- Orders Section --- */
+/* .orders-container {
+  background: #e9f0f5;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+}
+
+.orders-header {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.order-left h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.3rem;
+}
+
+.order-left p {
+  margin: 0.2rem 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.order-right {
+  text-align: right;
+}
+
+.order-right .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.booking-id {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.no-orders {
+  text-align: center;
+  color: #777;
+  padding: 3rem 0;
+  font-size: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #555;
+} */
+
+
+.orders-container {
+  padding: 40px;
+  background-color: #f8fafc;
+  min-height: 60vh;
+}
+
+.orders-header {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: scale(1.01);
+}
+
+.order-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.movie-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+}
+
+.theater {
+  font-size: 15px;
+  color: #444;
+}
+
+.datetime, .seats, .payment-id {
+  font-size: 14px;
+  color: #555;
+}
+
+.order-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.booking-id, .booked-on {
+  font-size: 13px;
+  color: #555;
+}
+
+.no-orders {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-top: 50px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  padding: 50px;
+}

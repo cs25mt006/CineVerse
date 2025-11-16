@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Inception",
+    "language": "English",
+    "genre": "Sci-Fi",
+    "poster": "assets/images/inception.jpg",
+    "duration": 148,
+    "rating": 8.8
+  },
+  {
+    "id": 2,
+    "title": "RRR",
+    "language": "Telugu",
+    "genre": "Action",
+    "poster": "assets/images/rrr.jpg",
+    "duration": 182,
+    "rating": 8.0
+  }
+]

@@ -1,0 +1,89 @@
+<app-admin-nav-bar></app-admin-nav-bar>
+
+<div class="edit-shows-container">
+  <h1 class="page-title">EDIT SHOWS</h1>
+
+  
+  <div class="form-group">
+    <label>Location</label>
+    <select [(ngModel)]="selectedLocation" (change)="onLocationSelect()">
+      <option value="">Select Location</option>
+      <option *ngFor="let loc of locations" [value]="loc.id">
+        {{ loc.name }}
+      </option>
+    </select>
+  </div>
+
+  
+  <div class="form-group" *ngIf="movies.length > 0">
+    <label>Movie</label>
+    <select [(ngModel)]="selectedMovie" (change)="onMovieSelect()">
+      <option value="">Select Movie</option>
+      <option *ngFor="let m of movies" [value]="m.movie_id">
+        {{ m.title }}
+      </option>
+    </select>
+  </div>
+
+  
+  <div class="form-group" *ngIf="theaters.length > 0">
+    <label>Theater</label>
+    <select [(ngModel)]="selectedTheater" (change)="onTheaterSelect()">
+      <option value="">Select Theater</option>
+        <option *ngFor="let t of theaters" [ngValue]="t.id">
+        {{ t.name }}
+        </option>
+    </select>
+  </div>
+
+  
+  <div *ngIf="filteredShows.length > 0" class="show-list">
+    <h2 class="section-title">Shows for Selected Theater</h2>
+
+    <div class="show-card" *ngFor="let s of filteredShows">
+
+      
+      <div class="show-header" (click)="toggleExpand(s)">
+        <div class="show-title">
+          {{ s.date }} • {{ s.showtime }}
+        </div>
+        <div class="show-subtitle">
+          {{ s.theater.name }} • Screen: {{ s.screen }}
+        </div>
+      </div>
+
+      
+      <div class="show-body" *ngIf="expandedShowId === s.id">
+
+        <div class="form-group">
+          <label>Movie</label>
+          <select [(ngModel)]="s.movie">
+            <option *ngFor="let m of movies" [value]="m.movie_id">
+              {{ m.title }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Date</label>
+            <input type="date" [(ngModel)]="s.date">
+          </div>
+
+          <div class="form-group half">
+            <label>Show Time</label>
+            <input type="time" [(ngModel)]="s.showtime">
+          </div>
+        </div>
+
+        <button class="submit-btn" (click)="saveChanges(s)">
+          Save Changes
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
