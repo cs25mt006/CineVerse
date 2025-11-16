@@ -67,26 +67,26 @@ class BookingTests(APITestCase):
         self.assertTrue(isinstance(response.data, list))
     
     def test_lock_seat_view_success(self):
-        url = reverse('lock-seat')
+        url = reverse('bookings:lock-seat')
         data = {'show_id': self.show.id, 'locked_seat_ids': [self.locked_seat.id]}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['results'][0]['result'], 'locked')
     
     def test_lock_seat_view_missing_params(self):
-        url = reverse('lock-seat')
+        url = reverse('bookings:lock-seat')
         response = self.client.post(url, {}, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_book_seats_view(self):
-        url = reverse('book-seats')
+        url = reverse('bookings:book-seats')
         data = {'show_id': self.show.id, 'locked_seat_ids': [self.locked_seat.id]}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn(self.locked_seat.id, response.data['booked'])
 
     def test_create_booking_view(self):
-        url = reverse('create-booking')
+        url = reverse('bookings:create-booking')
         data = {
             'user_id': self.user.id,
             'locked_seat_ids': [self.locked_seat.seat.id],
@@ -99,23 +99,23 @@ class BookingTests(APITestCase):
         self.assertTrue(response.data['success'])
 
     def test_create_booking_missing_params(self):
-        url = reverse('create-booking')
+        url = reverse('bookings:create-booking')
         data = {'user_id': self.user.id}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_orders_view(self):
-        url = reverse('your-orders')
+        url = reverse('bookings:your-orders')
         response = self.client.get(url, {'user_id': self.user.id})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(len(response.data) >= 1)
 
     def test_get_orders_missing_user_id(self):
-        url = reverse('your-orders')
+        url = reverse('bookings:your-orders')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_orders_user_not_found(self):
-        url = reverse('your-orders')
+        url = reverse('bookings:your-orders')
         response = self.client.get(url, {'user_id': 9999})
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
