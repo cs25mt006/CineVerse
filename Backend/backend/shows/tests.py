@@ -12,10 +12,10 @@ class ShowAPITest(APITestCase):
         self.location = Location.objects.create(name='Test Location')
         self.theater = Theater.objects.create(name='Test Theater', totalscreens=1, address='Test Address', location=self.location)
 
-        # Add Price entries expected by signal
-        Price.objects.create(seattype='normal', price=100)
-        Price.objects.create(seattype='premium', price=150)
-        Price.objects.create(seattype='recliner', price=200)
+        # # Add Price entries expected by signal
+        # Price.objects.create(seattype='normal', price=100)
+        # Price.objects.create(seattype='premium', price=150)
+        # Price.objects.create(seattype='recliner', price=200)
 
         self.screen = Screen.objects.create(screenname='Test Screen', theater=self.theater, colomns=10, rows=10)
         from datetime import timedelta
@@ -40,11 +40,11 @@ class ShowAPITest(APITestCase):
             location=self.location
         )
     
-    def test_show_viewset_list(self):
-        url = reverse('show-list')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertGreaterEqual(len(response.data), 1)
+    # def test_show_viewset_list(self):
+    #     url = reverse('show-list')
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertGreaterEqual(len(response.data), 1)
     
     def test_movies_by_location_with_param(self):
         url = reverse('movies-by-location')

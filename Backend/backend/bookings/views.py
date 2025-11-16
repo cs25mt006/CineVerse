@@ -1,21 +1,23 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import Show, Seat, Locked_Seat
 from django.utils import timezone
 from datetime import timedelta
 from .models import Locked_Seat, Booking
-from .serializers import BookingSerializer, Locked_SeatSerializer
+from .serializers import BookingDetailsSerializer, BookingSerializer, Locked_SeatSerializer
 from django.shortcuts import get_object_or_404
 from users.models import User
 from rest_framework import viewsets
 
 class BookingViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
 class LockedSeatViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
     queryset = Locked_Seat.objects.all()
     serializer_class = Locked_SeatSerializer
 
@@ -124,7 +126,6 @@ class BookSeatsView(APIView):
         return Response({'booked': updated, 'notfound': notfound})
     
 
-
 class CreateBookingView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -134,6 +135,8 @@ class CreateBookingView(APIView):
         totalamount = request.data.get('totalamount')
         show_id = request.data.get('show_id')
         payment_id = request.data.get('payment_id')
+        
+        print("CreateBookingView called with:", request.data)
 
         # Validate all params
         if not all([user_id, locked_seat_ids, totalamount, show_id, payment_id]):
@@ -141,7 +144,9 @@ class CreateBookingView(APIView):
 
         user = get_object_or_404(User, id=user_id)
         show = get_object_or_404(Show, id=show_id)
-        seats = Seat.objects.filter(id__in=locked_seat_ids)
+        # seats = Seat.objects.filter(id__in=locked_seat_ids)
+        locked_seats = Locked_Seat.objects.filter(id__in=locked_seat_ids)
+        seats = Seat.objects.filter(id__in=locked_seats.values_list('seat_id', flat=True))              
 
         if seats.count() != len(locked_seat_ids):
             return Response({'error': 'Some seats not found.'}, status=404)
@@ -161,7 +166,58 @@ class CreateBookingView(APIView):
         movie.save()
 
         return Response({'success': True, 'booking_id': booking.id})
-    
+      
+"""
+class CreateBookingView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user_id = request.data.get('user_id')
+        locked_seat_ids = request.data.get('locked_seat_ids')  # List
+        totalamount = request.data.get('totalamount')
+        show_id = request.data.get('show_id')
+        payment_id = request.data.get('payment_id')
+
+        # Validate all params
+        if not all([user_id, locked_seat_ids, totalamount, show_id, payment_id]):
+            return Response({'error': 'All fields are required.'}, status=400)
+
+        user = get_object_or_404(User, id=user_id)
+        show = get_object_or_404(Show, id=show_id)
+        
+        # Check locked seat statuses
+        locked_seats = Locked_Seat.objects.filter(id__in=locked_seat_ids, show_id=show_id)
+        
+        if locked_seats.count() != len(locked_seat_ids):
+            return Response({'error': 'Some locked seats not found.'}, status=404)
+        
+        # Check if any seat is already booked
+        booked_seats = locked_seats.filter(status='booked')
+        if booked_seats.exists():
+            return Response({'error': 'Some seats are already booked.'}, status=400)
+        
+        seats = Seat.objects.filter(id__in=[ls.seat_id for ls in locked_seats])
+
+        if seats.count() != len(locked_seat_ids):
+            return Response({'error': 'Some seats not found.'}, status=404)
+
+        # Create booking
+        booking = Booking.objects.create(
+            user=user,
+            show=show,
+            totalamount=totalamount,
+            payment_id=payment_id
+        )
+        booking.seats.set(seats)
+        booking.save()
+        # Update the movie revenue
+        movie = show.movie
+        movie.revenue = (movie.revenue or 0) + float(totalamount)
+        movie.save()
+
+        return Response({'success': True, 'booking_id': booking.id})
+"""
+ 
 class GetOrdersView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -172,5 +228,6 @@ class GetOrdersView(APIView):
         if User.objects.filter(id=user_id).count() == 0:
             return Response({'error': 'User not found'}, status=404)
         orders = Booking.objects.filter(user_id=user_id)
-        serializer = BookingSerializer(orders, many=True, context={'request': request})
+        serializer = BookingDetailsSerializer(orders, many=True, context={'request': request})
         return Response(serializer.data)
+    

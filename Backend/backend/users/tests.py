@@ -18,7 +18,7 @@ class UserModelTest(TestCase):
 class SignupSerializerTest(TestCase):
     def test_signup_valid(self):
         data = {
-            'username': 'newuser',
+            'username': 'newuser', 
             'password': 'pw',
             'email': 'nu@example.com',
             'first_name': 'New',
@@ -58,13 +58,13 @@ class UserViewsTest(APITestCase):
         self.assertTrue(response.data['success'])
 
     def test_login_success(self):
-        data = {'username': 'client_user', 'password': 'pw'}
+        data = {'email': 'c@example.com', 'password': 'pw'}
         response = self.client.post(self.login_url, data)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data['success'])
 
     def test_login_fail(self):
-        data = {'username': 'wrong', 'password': 'nopw'}
+        data = {'email': 'wrong', 'password': 'nopw'}
         response = self.client.post(self.login_url, data)
         self.assertEqual(response.status_code, 400)
         self.assertFalse(response.data['success'])

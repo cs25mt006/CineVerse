@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import stripe
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'bookings',
     'movies',
     'shows',
+    'payments',
     'drf_yasg',                ###########################################################################
 ]
 
@@ -90,12 +92,16 @@ DATABASES = {
         'PASSWORD': 'Harshini@2004',
         'HOST': 'localhost',  # or remote IP if shared
         'PORT': '3306',
+        'TEST':{
+            'NAME': 'CineVerse',
+        },
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
 
+TEST_RUNNER = 'backend.runner.RealDbTestRunner'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -150,7 +156,10 @@ CORS_ALLOW_CREDENTIALS = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.authentication.EmailBackend',
+]
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -159,3 +168,6 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
+stripe.api_key = "API_KEY"
+

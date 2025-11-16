@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser
 from .models import Show
 from .serializers import ShowMovieSerializer, ShowSerializer, ShowsSerializer
 from rest_framework import viewsets
 
 class ShowViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
     queryset = Show.objects.all()
     serializer_class = ShowsSerializer
 
@@ -16,7 +17,6 @@ class MoviesByLocationView(APIView):
 
     def get(self, request):
         location_id = request.GET.get('location_id', None)
-        print
         if location_id:
             shows = Show.objects.filter(location_id=location_id).select_related('movie')
         else:
@@ -33,7 +33,7 @@ class MoviesByLocationView(APIView):
                     'title': show.movie.title,
                     'poster': request.build_absolute_uri(show.movie.poster.url) if show.movie.poster else None
                 })
-        print(movies_data)
+        # print(movies_data)
         return Response(movies_data)
 
 class ShowByMovieView(APIView):

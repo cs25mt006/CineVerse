@@ -38,7 +38,7 @@ urlpatterns = [
     path('api/shows/', include('shows.urls')),
     path('api/bookings/', include('bookings.urls')),
     path('api/users/', include('users.urls')),
-    
+    path('api/payments/', include('payments.urls')),  ######################################################################
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),  ######################################################################
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),  ######################################################################
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  ######################################################################

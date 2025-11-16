@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser
 from .models import Movie
 from .serializers import MovieSearchSerializer, MovieDetailsSerializer, MovieSerializer
 from rest_framework import viewsets
 
 class MovieViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAdminUser]
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
@@ -28,7 +29,7 @@ class MovieDetailsView(APIView):
 
     def get(self, request):
         movie_id = request.GET.get('movie_id', None)
-        print(movie_id)
+        # print(movie_id)
         try:
             movie = Movie.objects.get(id=movie_id)
         except Movie.DoesNotExist:

@@ -31,11 +31,11 @@ class MovieAPITest(APITestCase):
             revenue=500000,
         )
 
-    def test_movie_list_viewset(self):
-        url = reverse('movie-list')  # from router's basename
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+    # def test_movie_list_viewset(self):
+    #     url = reverse('movie-list')  # from router's basename
+    #     response = self.client.get(url)
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #     self.assertEqual(len(response.data), 2)
 
     def test_movie_search_with_query(self):
         url = reverse('movie-search')

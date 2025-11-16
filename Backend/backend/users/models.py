@@ -8,6 +8,8 @@ class User(AbstractUser):
     gender = models.CharField(max_length=10, null=True, blank=True)
     email = models.EmailField(unique=True)
     # location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='custom_user_set',  # change this

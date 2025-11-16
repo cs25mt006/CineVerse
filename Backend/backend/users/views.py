@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from .models import User
 from .serializers import UserSerializer, UsersSerializer
 from rest_framework import viewsets
 
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UsersSerializer
 
@@ -63,9 +64,11 @@ class LoginView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        username = request.data.get('username')
+        # username = request.data.get('username')
+        email = request.data.get('email')
         password = request.data.get('password')
-        user = authenticate(username=username, password=password)
+        # user = authenticate(username=username, password=password)
+        user = authenticate(email=email, password=password)
         if user:
             # Return user details or token if you use JWT/DRF auth
             return Response({
@@ -76,6 +79,7 @@ class LoginView(APIView):
                 "first_name": user.first_name,
                 "last_name": user.last_name,
                 "gender": user.gender,
+                "is_superuser": user.is_superuser,
                 # "profileimage": request.build_absolute_uri(user.profileimage.url) if user.profileimage else None,
             })
         else:
