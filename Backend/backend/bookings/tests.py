@@ -61,7 +61,7 @@ class BookingTests(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_seats_status_view(self):
-        url = reverse('seats-status')
+        url = reverse('bookings:seats-status')
         response = self.client.get(url, {'show_id': self.show.id})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(isinstance(response.data, list))
