@@ -28,9 +28,9 @@ class BookingTests(APITestCase):
         self.location = Location.objects.create(name='City1')
         self.theater = Theater.objects.create(name='Theater1', totalscreens=1, address='Address1', location=self.location)
 
-        # Price.objects.create(seattype='normal', price=100.0)
-        # Price.objects.create(seattype='premium', price=150.0)
-        # Price.objects.create(seattype='recliner', price=200.0)
+        Price.objects.create(seattype='normal', price=100.0)
+        Price.objects.create(seattype='premium', price=150.0)
+        Price.objects.create(seattype='recliner', price=200.0)
 
         self.screen = Screen.objects.create(screenname='TestScreen', theater=self.theater, colomns=5, rows=5)
         # Seats with price 'normal'

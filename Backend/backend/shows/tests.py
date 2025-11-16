@@ -13,9 +13,9 @@ class ShowAPITest(APITestCase):
         self.theater = Theater.objects.create(name='Test Theater', totalscreens=1, address='Test Address', location=self.location)
 
         # # Add Price entries expected by signal
-        # Price.objects.create(seattype='normal', price=100)
-        # Price.objects.create(seattype='premium', price=150)
-        # Price.objects.create(seattype='recliner', price=200)
+        Price.objects.create(seattype='normal', price=100)
+        Price.objects.create(seattype='premium', price=150)
+        Price.objects.create(seattype='recliner', price=200)
 
         self.screen = Screen.objects.create(screenname='Test Screen', theater=self.theater, colomns=10, rows=10)
         from datetime import timedelta
