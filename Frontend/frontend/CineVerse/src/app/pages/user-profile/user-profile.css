@@ -104,72 +104,6 @@ input[readonly] {
   border-bottom: 2px solid #000;
 }
 
-/* --- Orders Section --- */
-/* .orders-container {
-  background: #e9f0f5;
-  min-height: 100vh;
-  padding: 2rem 4rem;
-}
-
-.orders-header {
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-}
-
-.orders-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.order-card {
-  display: flex;
-  justify-content: space-between;
-  background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.order-left h3 {
-  font-size: 1.1rem;
-  margin: 0 0 0.3rem;
-}
-
-.order-left p {
-  margin: 0.2rem 0;
-  color: #555;
-  font-size: 0.9rem;
-}
-
-.order-right {
-  text-align: right;
-}
-
-.order-right .price {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.booking-id {
-  font-size: 0.85rem;
-  color: #777;
-}
-
-.no-orders {
-  text-align: center;
-  color: #777;
-  padding: 3rem 0;
-  font-size: 1rem;
-}
-
-.loading {
-  text-align: center;
-  padding: 3rem;
-  color: #555;
-} */
-
 
 .orders-container {
   padding: 40px;
@@ -256,4 +190,165 @@ input[readonly] {
   text-align: center;
   font-size: 18px;
   padding: 50px;
+}
+
+
+
+
+/* ============================
+   Recommendations — profile tab
+   Matches the existing user-profile theme
+   ============================ */
+
+.reco-container {
+  background: #e9f0f5;
+  padding: 2rem 4rem;
+  min-height: 60vh;
+}
+
+/* Title */
+.reco-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: #222;
+}
+
+/* Preferences row */
+.reco-preferences {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.reco-preferences label {
+  font-weight: 600;
+  color: #444;
+  margin-right: 0.5rem;
+}
+
+/* Genre select (match profile inputs) */
+.genre-select {
+  border: 1px solid #ccc;
+  padding: 0.55rem 0.75rem;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.95rem;
+  color: #333;
+  min-width: 220px;
+}
+
+/* Button (reuse profile button aesthetic) */
+.reco-btn {
+  background-color: #111;
+  color: #fff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.reco-btn:hover { background-color: #333; }
+.reco-btn:disabled { background: #bbb; cursor: not-allowed; }
+
+/* Loading */
+.reco-container .loading {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  padding: 1rem 0;
+}
+
+/* Results grid */
+.reco-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+/* Card */
+.reco-card {
+  display: flex;
+  gap: 12px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  align-items: flex-start;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  overflow: hidden;
+}
+
+.reco-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Poster */
+.reco-poster {
+  width: 84px;
+  height: 126px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #efefef;
+}
+
+/* Info */
+.reco-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.reco-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reco-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.reco-info a {
+  margin-top: auto;
+  color: #0b5ed7;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.reco-info a:hover { text-decoration: underline; }
+
+/* small screens tweak */
+@media (max-width: 640px) {
+  .reco-preferences {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .genre-select { min-width: 100%; }
+  .reco-results { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .reco-poster { width: 64px; height: 96px; }
+}
+
+/* Minor utility to match profile spacing */
+.reco-container .no-results {
+  text-align: center;
+  color: #666;
+  padding: 2rem 0;
 }

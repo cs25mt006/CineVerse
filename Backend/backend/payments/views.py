@@ -6,6 +6,7 @@ from django.conf import settings
 @api_view(['POST'])
 def create_payment_intent(request):
     try:
+        print('h')
         data = request.data
         amount = int(data.get("amount", 0))  # in paise for INR
         currency = "inr"

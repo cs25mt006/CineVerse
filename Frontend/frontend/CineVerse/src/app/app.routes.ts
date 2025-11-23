@@ -20,6 +20,7 @@ export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'movie/:id', component: MovieDetails },
   { path: 'profile', component: UserProfile, canActivate: [AuthGuard] },
+  //{ path: 'profile', component: UserProfile },
   { path: 'shows/:movieId', component: Shows },
   { path: 'seats/:showId', component: SeatMatrix },
   { path: 'payment', component: PaymentSummary, canActivate: [AuthGuard] },

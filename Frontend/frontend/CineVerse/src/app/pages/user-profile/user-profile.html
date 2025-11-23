@@ -14,6 +14,13 @@
   >
     Your Orders
   </button>
+  <button
+    [class.active]="activeTab === 'reco'"
+    (click)="setActiveTab('reco')"
+  >
+    Recommendations
+  </button>
+
 </div>
 
 <!-- === PROFILE SECTION === -->
@@ -83,6 +90,51 @@
     </ng-template>
   </div>
 </ng-template>
+
+
+
+<!-- === RECOMMENDATIONS SECTION === -->
+<div *ngIf="activeTab === 'reco'" class="reco-container">
+
+  <h1 class="reco-title">Movie Recommendations</h1>
+
+  <!-- Preferences -->
+  <div class="reco-preferences">
+    <label>Select your preferred genres:</label>
+
+    <select [(ngModel)]="selectedGenre" class="genre-select">
+      <option value="" disabled selected>Select Genre</option>
+      <option *ngFor="let g of genreList" [value]="g">{{ g }}</option>
+    </select>
+
+    <button (click)="generateRecommendations()" class="reco-btn">
+      Get Recommendations
+    </button>
+  </div>
+
+  <!-- Results -->
+  <div *ngIf="isRecoLoading" class="loading">Loading recommendations...</div>
+
+  <div class="reco-results" *ngIf="!isRecoLoading">
+    <div class="reco-card" *ngFor="let m of recommendedMovies">
+      <img
+        [src]="buildPosterUrl(m.poster_path)"
+        class="reco-poster"
+        alt="poster"
+      />
+
+      <div class="reco-info">
+        <h3>{{ m.title }}</h3>
+        <p>⭐ {{ m.vote_average }}</p>
+        <a [href]="m.imdb_link" target="_blank">View on IMDb</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
 <!-- === GLOBAL LOADING TEMPLATE === -->
